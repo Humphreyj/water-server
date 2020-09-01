@@ -3,7 +3,7 @@ function registerErrorHandler(type = 'client'){
         
         if(!Object.keys(req.body).length) return res.status(400).json('Request must include valid information.')
 
-        const {first_name, last_name, email, phone, password, confirm_password, height, sex} = req.body;
+        const {display_name,email, location, password, confirm_password} = req.body;
         // Regular expresion that tests if the password is strong enough
         // ^ = String starts
         // (?=.*[a-z]) contains any lowercase alphabetical char from a-z
@@ -15,11 +15,9 @@ function registerErrorHandler(type = 'client'){
         // All of this could probably move to a middleware later. Checking required fields are there,
         // Checking if passwords match, checking if pass is strong enough. We could have Detailed error messages
         // and do password checks for each field.
-        switch(first_name, last_name, email, phone, password, confirm_password, height, sex){
-            case !first_name:
+        switch(display_name,email, location, password, confirm_password){
+            case !display_name:
                 return res.status(400).json("First name is a required field.");
-            case !last_name: 
-                return res.status(400).json("Last name is a required field.");
             case !email: 
                 return res.status(400).json("Email is a required field.");
             case !password: 

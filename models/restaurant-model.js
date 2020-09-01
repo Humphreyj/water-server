@@ -29,9 +29,12 @@ function getRestaurantById(id) {
 }
 
 
+
+
 module.exports = {
     getAllRestaurants,
     getRestaurantById,
     addRestaurant,
-    deleteRestaurant
+    deleteRestaurant,
+    
 }

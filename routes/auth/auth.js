@@ -31,7 +31,7 @@ router.post('/login', async(req, res, next) => {
         if (user && passwordValid) {
             req.session.user = user;
             const token = generateToken(user)
-            res.status(200).json({token,message:"You did it."})
+            res.status(200).json({token,id:user.id,display: user.display_name})
         }else {
             res.status(404).json({message: "The Email/Password you provided is wrong!"})
         }

@@ -14,8 +14,15 @@ function findByEmail(email) {
             .where(email)
             .first()
 }
+function findById(id) {
+    return db('users')
+            .select('*')
+            .where(id)
+            .first()
+}
 
 module.exports = {
     register,
-    findByEmail
+    findByEmail,
+    findById
 }

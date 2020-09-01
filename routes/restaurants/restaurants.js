@@ -4,11 +4,9 @@ const router = require('express').Router()
 
 router.get('/', async (req,res) => {
     try{
-        const results= await resto_db.getAllRestaurants()
-        console.log(results)
-        res.status(200).json({
-            data: results
-   })
+        const results= await db.query('SELECT * FROM restaurants LEFT JOIN (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews GROUP BY restaurant_id) reviews on restaurants.id = reviews.restaurant_id;')
+        console.log(results.rows)
+        res.status(200).json(results.rows)
     }catch(err) {
         console.log(err)
     }
@@ -17,11 +15,9 @@ router.get('/', async (req,res) => {
 })
 router.get('/:id', async (req,res) => {
     try{
-        const result = await resto_db.getRestaurantById(req.params.id)
+        const result = await db.query('SELECT * FROM restaurants LEFT JOIN (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews GROUP BY restaurant_id) reviews on restaurants.id = reviews.restaurant_id WHERE restaurant_id = $1',[req.params.id])
         //I guess this is a parameterized query. I don't really like how it looks so im going to revisit it.
-        res.status(200).json({
-            data: result
-        })
+        res.status(200).json(result.rows[0])
     }catch(err) {
         console.log(err)
     }
@@ -55,6 +51,25 @@ router.delete('/:id', async (req, res) => {
         res.status(204).json({data: 'Your Item was Deleted.'})
     }catch(err) {
         console.log(err)
+    }
+})
+
+router.post('/:id/reviews', async(req, res) => {
+   try {
+       const newReview = await db.query('INSERT INTO reviews(users_id,restaurant_id,content,rating) values ($1,$2,$3,$4)',[req.body.users_id, req.params.id,req.body.content,req.body.rating])
+       res.status(201).json(newReview)
+   }catch(err) {
+    console.log(err)
+   }
+})
+
+router.get('/:id/reviews', async(req,res) => {
+    try{
+        const reviews = await db.query('SELECT display_name,content,rating FROM reviews INNER JOIN users ON reviews.users_id = users.id WHERE restaurant_id = ($1)',[req.params.id])
+        console.log(reviews)
+        res.status(200).json(reviews.rows)
+    }catch(err) {
+        console.log(error)
     }
 })
 
