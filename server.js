@@ -3,6 +3,10 @@ const PORT = process.env.PORT || 5000
 const morgan = require("morgan");
 const app = express();
 const session = require('express-session');
+const passport = require('passport');
+
+
+require("./passport/passport-local")(passport);
 
 const whitelist = [
 	"http://localhost:3000",
@@ -22,7 +26,7 @@ app.use(require('cors')({
 	},
 	methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
-
+app.use(passport.initialize());
 const sessionConfig = {
     name: "Dot",
     secret: 'Dot is great',

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('express').Router();
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 const user_db = require('../../models/user-model');
 const jwt = require('jsonwebtoken');
@@ -9,6 +10,7 @@ router.post('/register', require('../../middleware/RegisterErrorHandler')(), asy
     try{
         const {email} = req.body;
         const user = await user_db.findByEmail({email}).first()
+        
         if(user) {
             console.log(user)
             res.status(409).json({message: "There is an account associated with this email, please try logging in."})
