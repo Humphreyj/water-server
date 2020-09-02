@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
+    "migrate": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest",
+    "rollback": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:rollback",
+    "seed": "node -r dotenv/config ./node_modules/knex/bin/cli.js seed:run",
     "dev": "nodemon index.js"
   },
   "repository": {
@@ -21,6 +24,7 @@
   "homepage": "https://github.com/Humphreyj/water-server#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "connect-session-knex": "^1.7.3",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

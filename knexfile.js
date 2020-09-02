@@ -8,14 +8,14 @@ module.exports = {
         database: process.env.PGDATABASE,
         user: process.env.PGUSER,
         password: process.env.PGPASSWORD,
-        host: process.env.PHGOST,
+        host: process.env.PGHOST,
         port: process.env.PGPORT,
       },
       migrations: {
-        directory: './data/migrations'
+        directory: './db/migrations'
       },
       seeds : {
-        directory: './data/seeds'
+        directory: './db/seeds'
       },
       pool: {
        min: 2,

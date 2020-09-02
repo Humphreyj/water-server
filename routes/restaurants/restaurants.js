@@ -1,6 +1,7 @@
 const db = require('../../db')
 const resto_db = require('../../models/restaurant-model');
 const router = require('express').Router()
+const restricted = require('../../middleware/restricted-middleware');
 
 router.get('/', async (req,res) => {
     try{
@@ -54,10 +55,10 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.post('/:id/reviews', async(req, res) => {
+router.post('/:id/reviews',restricted, async(req, res) => {
    try {
        const newReview = await db.query('INSERT INTO reviews(users_id,restaurant_id,content,rating) values ($1,$2,$3,$4)',[req.body.users_id, req.params.id,req.body.content,req.body.rating])
-       res.status(201).json(newReview)
+       res.status(201).json(newReview.rows)
    }catch(err) {
     console.log(err)
    }

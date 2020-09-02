@@ -9,17 +9,27 @@ async function register(user){
     return findByEmail(user.email)
 }
 
-function findByEmail(email) {
-    return db('users')
-            .select('*')
-            .where(email)
-            .first()
+async function findByEmail(email) {
+    try {
+        const user = await db('users')
+        .select('*')
+        .where(email)
+        .first()
+        return user
+    }catch(err) {
+        console.log(err)
+    }
+    
 }
 function findById(id) {
+   try {
     return db('users')
-            .select('*')
-            .where(id)
-            .first()
+    .select('*')
+    .where(id)
+    .first()
+   }catch(err) {
+ console.log(err)
+   }
 }
 
 module.exports = {

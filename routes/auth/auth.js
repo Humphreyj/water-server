@@ -9,13 +9,16 @@ const secrets = require('../../config/secret');
 router.post('/register', require('../../middleware/RegisterErrorHandler')(), async (req, res, next)=> {
     try{
         const {email} = req.body;
-        const user = await user_db.findByEmail({email}).first()
+        const user = await user_db.findByEmail({email})
         
         if(user) {
             console.log(user)
             res.status(409).json({message: "There is an account associated with this email, please try logging in."})
         }else {
-            res.status(200).json(await user_db.register(req.body))
+            const result = await user_db.register(req.body)
+            console.log(result)
+            res.status(200).json(result)
+            return result
         }
        
     }catch(err){
@@ -27,7 +30,7 @@ router.post('/login', async(req, res, next) => {
     try {
         const {email, password} = req.body;
 
-        const user = await user_db.findByEmail({email}).first()
+        const user = await user_db.findByEmail({email})
         const passwordValid = await bcrypt.compare(password,user.password);
 
         if (user && passwordValid) {
@@ -60,7 +63,7 @@ router.get('/logout', (req, res) => {
             if(err) {
                 res.json({message: "Something went wrong."})
             }else {
-                res.status(200).json({message: "You have been logged out. Thanks for coming!"})
+                res.status(204).json({message: "You have been logged out. Thanks for coming!"})
             }
         })
     }else {

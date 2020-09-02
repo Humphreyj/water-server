@@ -3,6 +3,8 @@ const PORT = process.env.PORT || 5000
 const morgan = require("morgan");
 const app = express();
 const session = require('express-session');
+const KnexSessionStore = require('connect-session-knex')(session)
+const db = require('./db/dbConfig');
 const passport = require('passport');
 
 
@@ -28,6 +30,8 @@ app.use(require('cors')({
 }))
 app.use(passport.initialize());
 const sessionConfig = {
+	resave: false,
+	saveUnintialized: false,
     name: "Dot",
     secret: 'Dot is great',
     cookie: {
@@ -35,13 +39,17 @@ const sessionConfig = {
         secure: false,
         httpOnly: true
     },
-    resave: false,
-    saveUnintialized: false
+    
+	store: new KnexSessionStore({
+		knex: db,
+		createtable: true
+	})
 }
 app.use(morgan('dev'));
 app.use(session(sessionConfig))
 
 app.use(express.json());
+
 //Routes
 app.use('/api', require('./routes/router-index'))
 
