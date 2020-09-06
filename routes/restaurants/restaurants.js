@@ -67,7 +67,7 @@ router.post('/:id/reviews',restricted, async(req, res) => {
 router.get('/:id/reviews', async(req,res) => {
     try{
         const reviews = await db.query('SELECT display_name,content,rating FROM reviews INNER JOIN users ON reviews.users_id = users.id WHERE restaurant_id = ($1)',[req.params.id])
-        console.log(reviews)
+        
         res.status(200).json(reviews.rows)
     }catch(err) {
         console.log(error)

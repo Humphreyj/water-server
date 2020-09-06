@@ -6,9 +6,10 @@ const session = require('express-session');
 const KnexSessionStore = require('connect-session-knex')(session)
 const db = require('./db/dbConfig');
 const passport = require('passport');
+const cp = require('cookie-parser');
 
 
-require("./passport/passport-local")(passport);
+
 
 const whitelist = [
 	"http://localhost:3000",
@@ -28,7 +29,7 @@ app.use(require('cors')({
 	},
 	methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
-app.use(passport.initialize());
+
 const sessionConfig = {
 	resave: false,
 	saveUnintialized: false,
@@ -37,7 +38,7 @@ const sessionConfig = {
     cookie: {
         maxAge: 1000 * 1200,
         secure: false,
-        httpOnly: true
+        httpOnly: false
     },
     
 	store: new KnexSessionStore({
@@ -45,6 +46,7 @@ const sessionConfig = {
 		createtable: true
 	})
 }
+app.use(cp())
 app.use(morgan('dev'));
 app.use(session(sessionConfig))
 

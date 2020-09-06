@@ -36,6 +36,7 @@ router.post('/login', async(req, res, next) => {
         if (user && passwordValid) {
             req.session.user = user;
             const token = generateToken(user)
+            console.log(user)
             res.status(200).json({token,id:user.id,display: user.display_name})
         }else {
             res.status(404).json({message: "The Email/Password you provided is wrong!"})
@@ -70,6 +71,18 @@ router.get('/logout', (req, res) => {
         res.status(200).json({message: 'You were not logged in even.'})
     }
 })
+
+router.get('/session/', (req, res) => {
+    const token = req.cookies || ''
+    if(token){
+      user = req.session.user
+       res.status(200).send(user)
+    }
+    else{
+    
+       res.status(200).send({message: `No valid session ${token}`})
+    }
+ })
 
 
 
