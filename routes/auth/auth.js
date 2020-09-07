@@ -6,7 +6,7 @@ const user_db = require('../../models/user-model');
 const jwt = require('jsonwebtoken');
 const secrets = require('../../config/secret');
 
-router.post('/register', require('../../middleware/RegisterErrorHandler')(), async (req, res, next)=> {
+router.post('/register', async (req, res, next)=> {
     try{
         const {email} = req.body;
         const user = await user_db.findByEmail({email})
@@ -37,7 +37,8 @@ router.post('/login', async(req, res, next) => {
             req.session.user = user;
             const token = generateToken(user)
             console.log(user)
-            res.status(200).json({token,id:user.id,display: user.display_name})
+            delete user.password
+            res.status(200).json(user)
         }else {
             res.status(404).json({message: "The Email/Password you provided is wrong!"})
         }
@@ -75,11 +76,16 @@ router.get('/logout', (req, res) => {
 router.get('/session/', (req, res) => {
     const token = req.cookies || ''
     if(token){
-      user = req.session.user
-       res.status(200).send(user)
+     let user = req.session.user
+      if(!user) {
+          console.log('no user')
+      }else {
+        delete user.password
+        res.status(200).send(user)
+      }
     }
     else{
-    
+       console.log('this happenend')
        res.status(200).send({message: `No valid session ${token}`})
     }
  })

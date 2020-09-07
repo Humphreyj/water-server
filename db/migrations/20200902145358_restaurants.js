@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('restaurants', (tbl) => {
         tbl.increments()
-        tbl.string('restaurant_name', 20).notNull();
+        tbl.string('restaurant_name').notNull();
         tbl.string('address').notNull()
         tbl.integer('price_range').notNull();
         

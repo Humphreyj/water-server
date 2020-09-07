@@ -7,6 +7,7 @@ router.get('/', async (req,res) => {
     try{
         const results= await db.query('SELECT * FROM restaurants LEFT JOIN (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews GROUP BY restaurant_id) reviews on restaurants.id = reviews.restaurant_id;')
         console.log(results.rows)
+        console.log('user', req.session)
         res.status(200).json(results.rows)
     }catch(err) {
         console.log(err)
