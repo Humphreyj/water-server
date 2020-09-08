@@ -1,5 +1,5 @@
 const server = require('./server');
-
+require("dotenv").config();
 const routes = require('./routes/router-index')
 const PORT = process.env.PORT || 5000
 
