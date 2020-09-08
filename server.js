@@ -1,5 +1,5 @@
 const express  = require('express');
-const PORT = process.env.PORT || 5000
+
 const morgan = require("morgan");
 const app = express();
 const session = require('express-session');
@@ -55,9 +55,7 @@ app.use(express.json());
 //Routes
 app.use('/api', require('./routes/router-index'))
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
+
 
 
 module.exports = app;
