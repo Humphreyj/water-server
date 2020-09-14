@@ -31,6 +31,7 @@ app.use(require('cors')({
 }))
 
 const sessionConfig = {
+
     name: "Dot",
     secret: 'Dot is great',
     cookie: {
@@ -39,7 +40,7 @@ const sessionConfig = {
         httpOnly: false
 	},
 	resave: false,
-	saveUninitialized: false,
+	saveUnintialized: false,
     
 	store: new KnexSessionStore({
 		knex: db,
