@@ -40,7 +40,7 @@ const sessionConfig = {
         httpOnly: false
 	},
 	resave: false,
-	saveUnintialized: false,
+	saveUninitialized: false,
     
 	store: new KnexSessionStore({
 		knex: db,
