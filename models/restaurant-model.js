@@ -24,13 +24,13 @@ function getRestaurantById(id) {
 
  function addRestaurant(restaurant) {
     try{
-
+        const newRestaurant = {...restaurant}
+        return db('restaurants')
+        .insert(newRestaurant)
     }catch(err) {
         console.log(err)
     }
-    const newRestaurant = {...restaurant}
-    return db('restaurants')
-        .insert(newRestaurant)
+    
 }
 
  async function deleteRestaurant(id) {
