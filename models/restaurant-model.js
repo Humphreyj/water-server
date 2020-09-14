@@ -1,18 +1,33 @@
 const db = require('../db/dbConfig');
 
 function getAllRestaurants() {
-    return db('restaurants')
+    try{
+        return db('restaurants')
             .select("*")
+    }catch(err) {
+        console.log(err)
+    }
+    
 }
 
 function getRestaurantById(id) {
-    return db('restaurants')
+    try{
+        return db('restaurants')
             .select("*")
             .where({id})
             .first()
+    }catch(err) {
+        console.log(err)
+    }
+    
 }
 
  function addRestaurant(restaurant) {
+    try{
+
+    }catch(err) {
+        console.log(err)
+    }
     const newRestaurant = {...restaurant}
     return db('restaurants')
         .insert(newRestaurant)

@@ -60,34 +60,44 @@ function generateToken(user) {
 //generate token
 
 router.get('/logout', (req, res) => {
-    if(req.session) {
-        req.session.destroy(err => {
-            if(err) {
-                res.json({message: "Something went wrong."})
-            }else {
-                res.status(204).json({message: "You have been logged out. Thanks for coming!"})
-            }
-        })
-    }else {
-        res.status(200).json({message: 'You were not logged in even.'})
+    try{
+        if(req.session) {
+            req.session.destroy(err => {
+                if(err) {
+                    res.json({message: "Something went wrong."})
+                }else {
+                    res.status(204).json({message: "You have been logged out. Thanks for coming!"})
+                }
+            })
+        }else {
+            res.status(200).json({message: 'You were not logged in even.'})
+        }
+    }catch(err) {
+        console.log(err)
     }
+    
 })
 
 router.get('/session/', (req, res) => {
     const token = req.cookies || ''
-    if(token){
-     let user = req.session.user
-      if(!user) {
-          console.log('no user')
-      }else {
-        delete user.password
-        res.status(200).send(user)
-      }
+    try{
+        if(token){
+            let user = req.session.user
+             if(!user) {
+                 console.log('no user')
+             }else {
+               delete user.password
+               res.status(200).send(user)
+             }
+           }
+           else{
+              console.log('this happenend')
+              res.status(200).send({message: `No valid session ${token}`})
+           }
+    }catch(err){
+        console.log(err)
     }
-    else{
-       console.log('this happenend')
-       res.status(200).send({message: `No valid session ${token}`})
-    }
+   
  })
 
 
