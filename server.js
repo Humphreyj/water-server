@@ -7,6 +7,7 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const db = require('./db/dbConfig');
 const passport = require('passport');
 const cp = require('cookie-parser');
+const cors = require('cors');
 
 
 
@@ -16,20 +17,7 @@ const whitelist = [
 	"http://localhost:3001",
 	"https://zealous-spence-ca4b05.netlify.app",
 ];
-app.use(require('cors')({
-	preflightContinue: true,
-	credentials: true,
-	origin: function(origin, cb){
-		if (whitelist.includes(origin) || !origin) {
-			return cb(null, true)
-		} else {
-			console.log('is it having an error?')
-			return cb(new Error('Not allowed by CORS'))
-		}
-	},
-	methods: ['GET', 'POST', 'PUT', 'DELETE']
-}))
-
+app.use(cors())
 const sessionConfig = {
 
     name: "Dot",
