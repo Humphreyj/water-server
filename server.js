@@ -14,7 +14,7 @@ const cp = require('cookie-parser');
 const whitelist = [
 	"http://localhost:3000",
 	"http://localhost:3001",
-	"https://zealous-spence-ca4b05.netlify.app/",
+	"https://zealous-spence-ca4b05.netlify.app",
 ];
 app.use(require('cors')({
 	preflightContinue: true,
