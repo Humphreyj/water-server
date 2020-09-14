@@ -19,15 +19,14 @@ const whitelist = [
 app.use(require('cors')({
 	preflightContinue: true,
 	credentials: true,
-	origin: '*',
-	// origin: function(origin, cb){
-	// 	if (whitelist.includes(origin) || !origin) {
-	// 		return cb(null, true)
-	// 	} else {
-	// 		console.log('is it having an error?')
-	// 		return cb(new Error('Not allowed by CORS'))
-	// 	}
-	// },
+	origin: function(origin, cb){
+		if (whitelist.includes(origin) || !origin) {
+			return cb(null, true)
+		} else {
+			console.log('is it having an error?')
+			return cb(new Error('Not allowed by CORS'))
+		}
+	},
 	methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
 
