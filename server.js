@@ -28,8 +28,7 @@ app.use(require('cors')({
 
 const sessionConfig = {
 
-    name: "Dot",
-    secret: process.env.SECRET,
+    secret: process.env.SESSION_SECRET,
     cookie: {
         maxAge: 1000 * 1200,
         secure: false,
@@ -43,7 +42,7 @@ const sessionConfig = {
 		createtable: true
 	})
 }
-app.use(cp())
+app.use(cp(process.env.SESSION_SECRET))
 app.use(morgan('dev'));
 app.use(session(sessionConfig))
 
