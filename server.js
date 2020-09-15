@@ -29,7 +29,7 @@ app.use(require('cors')({
 const sessionConfig = {
 
     name: "Dot",
-    secret: 'Dot is great',
+    secret: process.env.SECRET,
     cookie: {
         maxAge: 1000 * 1200,
         secure: false,

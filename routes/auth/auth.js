@@ -78,21 +78,21 @@ router.get('/logout', (req, res) => {
     
 })
 
-router.get('/session/', (req, res) => {
+router.get('/session/', async(req, res) => {
     const token = req.cookies || ''
     try{
         if(token){
-            let user = req.session.user
+            let user = await req.session.user
              if(!user) {
                  console.log('no user')
+                 res.status(404).send({message: `No user`})
              }else {
                delete user.password
                res.status(200).send(user)
              }
-           }
-           else{
+           }else{
               console.log('this happenend')
-              res.status(200).send({message: `No valid session ${token}`})
+              res.status(200).send({message: `No valid session`})
            }
     }catch(err){
         console.log(err)
