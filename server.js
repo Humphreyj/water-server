@@ -22,7 +22,8 @@ app.use(require('cors')({
         "http://localhost:3000",
         "http://localhost:3001",
         process.env.CLIENT_URL,
-    ]
+	],
+	methods: '*'
 }))
 
 const sessionConfig = {
