@@ -7,7 +7,6 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const db = require('./db/dbConfig');
 const passport = require('passport');
 const cp = require('cookie-parser');
-const cors = require('cors');
 
 
 
@@ -17,7 +16,16 @@ const whitelist = [
 	"http://localhost:3001",
 	"https://zealous-spence-ca4b05.netlify.app",
 ];
-app.use(cors())
+app.use(require('cors')({
+	preflightContinue: true,
+	credentials: true,
+	origin: [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        process.env.CLIENT_URL,
+    ]
+}))
+
 const sessionConfig = {
 
     name: "Dot",
