@@ -5,7 +5,6 @@ const app = express();
 const session = require('express-session');
 const KnexSessionStore = require('connect-session-knex')(session)
 const db = require('./db/dbConfig');
-const passport = require('passport');
 const cp = require('cookie-parser');
 
 
@@ -42,9 +41,10 @@ const sessionConfig = {
 		createtable: true
 	})
 }
+app.use(session(sessionConfig)(process.env.SESSION_SECRET))
 app.use(cp(process.env.SESSION_SECRET))
 app.use(morgan('dev'));
-app.use(session(sessionConfig))
+
 
 app.use(express.json());
 
