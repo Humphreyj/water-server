@@ -1,8 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+node_modules/
+*.log
 .env
-# dependencies
-/node_modules
-.env
+.node-version
+.prettierignore
+coverage/
 /.pnp
 .pnp.js
 
