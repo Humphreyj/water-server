@@ -10,7 +10,7 @@ router.get('/', async (req,res) => {
         console.log('user', req.session)
         res.status(200).json(results.rows)
     }catch(err) {
-        console.log(err)
+        res.status(500).json({message: 'Something Went wrong'})
     }
   
    
