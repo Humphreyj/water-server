@@ -41,7 +41,7 @@ const sessionConfig = {
 		createtable: true
 	})
 }
-app.use(session(sessionConfig)(process.env.SESSION_SECRET))
+app.use(session(sessionConfig))
 app.use(cp(process.env.SESSION_SECRET))
 app.use(morgan('dev'));
 
