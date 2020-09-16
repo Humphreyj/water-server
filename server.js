@@ -21,7 +21,8 @@ app.use(require('cors')({
 	origin: [
         "http://localhost:3000",
         "http://localhost:3001",
-        process.env.CLIENT_URL,
+		process.env.CLIENT_URL,
+		"https://zealous-spence-ca4b05.netlify.app/"
 	],
 	allowedHeaders: ["Origin",'Content-Type', 'Authorization'],
 	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS']
