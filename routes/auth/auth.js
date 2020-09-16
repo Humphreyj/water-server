@@ -32,7 +32,7 @@ router.post('/login', async(req, res, next) => {
 
         const user = await user_db.findByEmail({email})
         const passwordValid = await bcrypt.compare(password,user.password);
-
+        console.log(user)
         if (user && passwordValid) {
             req.session.user = user;
             const token = generateToken(user)
