@@ -11,10 +11,7 @@ const cp = require('cookie-parser');
 
 
 
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-	next();
-  });
+
 app.use(require('cors')({
 	preflightContinue: true,
 	credentials: true,
