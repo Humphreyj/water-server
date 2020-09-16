@@ -23,7 +23,8 @@ app.use(require('cors')({
         "http://localhost:3001",
         process.env.CLIENT_URL,
 	],
-	allowedHeaders: ['Content-Type', 'Authorization']
+	allowedHeaders: ["Origin",'Content-Type', 'Authorization'],
+	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS']
 }))
 
 const sessionConfig = {
