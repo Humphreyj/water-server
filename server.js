@@ -45,7 +45,7 @@ const sessionConfig = {
 	})
 }
 app.use(session(sessionConfig))
-app.use(cp(process.env.SESSION_SECRET))
+app.use(cp())
 app.use(morgan('dev'));
 
 
