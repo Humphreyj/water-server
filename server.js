@@ -11,7 +11,7 @@ const cp = require('cookie-parser');
 
 
 
-
+app.enable('trust proxy');
 app.use(require('cors')({
 	preflightContinue: true,
 	credentials: true,
@@ -24,17 +24,17 @@ app.use(require('cors')({
 	allowedHeaders: ["Origin",'Content-Type', 'Authorization'],
 	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS']
 }))
-app.enable('trust proxy');
+
 const sessionConfig = {
 
     secret: process.env.SESSION_SECRET,
     cookie: {
         maxAge: 60000,
         secure: true,
-        httpOnly: false
+        httpOnly: ture
 	},
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: true,
 	key: 'sid',
 	proxy: true,
 	store: new KnexSessionStore({
