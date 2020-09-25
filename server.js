@@ -24,24 +24,25 @@ app.use(require('cors')({
 	allowedHeaders: ["Origin",'Content-Type', 'Authorization'],
 	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS']
 }))
-
+app.enable('trust proxy');
 const sessionConfig = {
 
     secret: process.env.SESSION_SECRET,
     cookie: {
         maxAge: 60000,
-        secure: false,
+        secure: true,
         httpOnly: false
 	},
 	resave: false,
 	saveUninitialized: false,
-    
+	key: 'sid',
+	proxy: true,
 	store: new KnexSessionStore({
 		knex: db,
 		createtable: true
 	})
 }
-app.enable('trust proxy');
+
 app.use(session(sessionConfig))
 app.use(cp())
 app.use(morgan('dev'));

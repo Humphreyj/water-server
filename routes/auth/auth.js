@@ -35,7 +35,7 @@ router.post('/login', async(req, res, next) => {
         console.log(user)
         if (user && passwordValid) {
             req.session.user = user;
-            const token = generateToken(user)
+            // const token = generateToken(user)
             console.log(user)
             delete user.password
             res.status(200).json(user)
