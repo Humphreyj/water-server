@@ -29,9 +29,14 @@ const sessionConfig = {
 
     secret: process.env.SESSION_SECRET,
     cookie: {
-        maxAge: 60000,
+
+     maxAge: 60000,
+
+		path:'/',
+
         secure: false,
-        httpOnly: false
+		httpOnly: false,
+		domain: process.env.CLIENT_URL
 	},
 	resave: false,
 	saveUninitialized: false,
