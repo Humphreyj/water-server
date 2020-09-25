@@ -31,10 +31,10 @@ const sessionConfig = {
     cookie: {
         maxAge: 60000,
         secure: true,
-        httpOnly: ture
+        httpOnly: false
 	},
 	resave: false,
-	saveUninitialized: true,
+	saveUninitialized: false,
 	key: 'sid',
 	proxy: true,
 	store: new KnexSessionStore({
