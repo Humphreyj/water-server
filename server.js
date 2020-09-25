@@ -33,7 +33,7 @@ const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     cookie: {
         maxAge: 1000 * 1200,
-        secure: false,
+        secure: true,
         httpOnly: false
 	},
 	resave: false,
