@@ -31,8 +31,9 @@ const sessionConfig = {
     cookie: {
 		path:'/',
         maxAge: 1000 * 1200,
-        secure: true,
-        httpOnly: false
+        secure: false,
+		httpOnly: false,
+		domain: process.env.CLIENT_URL
 	},
 	resave: false,
 	saveUninitialized: false,
