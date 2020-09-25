@@ -11,7 +11,7 @@ const cp = require('cookie-parser');
 
 
 
-app.enable('trust proxy');
+
 app.use(require('cors')({
 	preflightContinue: true,
 	credentials: true,
@@ -42,7 +42,7 @@ const sessionConfig = {
 		createtable: true
 	})
 }
-
+app.enable('trust proxy');
 app.use(session(sessionConfig))
 app.use(cp())
 app.use(morgan('dev'));
