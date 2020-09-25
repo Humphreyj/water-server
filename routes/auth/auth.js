@@ -37,7 +37,7 @@ router.post('/login', async(req, res, next) => {
             req.session.user = user;
             // const token = generateToken(user)
             console.log(user)
-            console.log(res.session.user)
+            console.log(req.session.user)
             delete user.password
             res.status(200).json(user)
         }else {
