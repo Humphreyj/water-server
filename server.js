@@ -29,7 +29,7 @@ const sessionConfig = {
 
     secret: process.env.SESSION_SECRET,
     cookie: {
-        maxAge: 1000 * 1200,
+        maxAge: 60000,
         secure: false,
         httpOnly: false
 	},
@@ -41,6 +41,7 @@ const sessionConfig = {
 		createtable: true
 	})
 }
+app.enable('trust proxy');
 app.use(session(sessionConfig))
 app.use(cp())
 app.use(morgan('dev'));
