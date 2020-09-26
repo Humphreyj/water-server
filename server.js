@@ -22,7 +22,7 @@ app.use(require('cors')({
 		"https://zealous-spence-ca4b05.netlify.app"
 	],
 	allowedHeaders: ["Origin",'Content-Type', 'Authorization'],
-	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS']
+	methods:['GET', 'PUT', 'POST','DELETE','OPTIONS','HEAD']
 }))
 app.enable('trust proxy');
 const sessionConfig = {
@@ -31,7 +31,7 @@ const sessionConfig = {
     cookie: {
         maxAge: 60000,
         secure: true,
-		httpOnly: true,
+		httpOnly: false,
 		sameSite: 'none'
 	},
 	resave: false,
