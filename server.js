@@ -32,7 +32,7 @@ const sessionConfig = {
 		path: "/",
         maxAge: 60000,
         secure: false,
-		httpOnly: true,
+		httpOnly: false,
 		sameSite: 'none'
 	},
 	resave: true,
