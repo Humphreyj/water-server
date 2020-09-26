@@ -30,13 +30,12 @@ const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     cookie: {
 		path: "/",
-		domain: "walp.herokuapp.com",
         maxAge: 60000,
         secure: true,
 		httpOnly: true,
-		sameSite: 'None'
+		sameSite: 'none'
 	},
-	resave: false,
+	resave: true,
 	saveUninitialized: true,
 	key: 'sid',
 	proxy: true,
