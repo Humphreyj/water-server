@@ -30,7 +30,7 @@ const sessionConfig = {
     secret: process.env.SESSION_SECRET,
     cookie: {
 		path: "/",
-		domain: "https://zealous-spence-ca4b05.netlify.app",
+		domain: "walp.herokuapp.com",
         maxAge: 60000,
         secure: true,
 		httpOnly: false,
