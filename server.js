@@ -33,8 +33,8 @@ const sessionConfig = {
 		domain: "walp.herokuapp.com",
         maxAge: 60000,
         secure: true,
-		httpOnly: false,
-		sameSite: 'none'
+		httpOnly: true,
+		sameSite: 'None'
 	},
 	resave: false,
 	saveUninitialized: true,
