@@ -33,7 +33,7 @@ const sessionConfig = {
         maxAge: 60000,
         secure: false,
 		httpOnly: false,
-		sameSite: 'none'
+		sameSite: 'false'
 	},
 	resave: true,
 	saveUninitialized: true,
