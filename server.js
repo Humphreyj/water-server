@@ -31,7 +31,7 @@ const sessionConfig = {
     cookie: {
 		path: "/",
         maxAge: 60000,
-        secure: true,
+        secure: false,
 		httpOnly: true,
 		sameSite: 'none'
 	},
